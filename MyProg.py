@@ -26,18 +26,19 @@ def randIntGen(a, b):
     return randNum
 
 def helpQuestion():
+    helpansw = str(0)
     while True:
-        helpansw = input("Voulez-vous afficher les limites révisées après chaque tentative pour mieux visualiser où vous en êtes? Y/N : ")
-        try:
-            helpansw == "Y" or helpansw == "N"
+        helpansw = str(input("Voulez-vous afficher les limites révisées après chaque tentative pour mieux visualiser où vous en êtes? Y/N : "))
+        if helpansw == 'Y' or helpansw == "N":
             break
-        except:
+        else:
             pass
-        return helpansw
+    #print(helpansw) #pour contrôle et debug
+    return helpansw
 
-#def limiter(helpansw):
-#    if helpansw == "Y":
-#        print("Les limites actuelles sont: Min = " + str(infL) + " Max = " + str(supL))
+def limiter(helpansw, infL, supL):
+    if helpansw == "Y":
+        print("Les limites actuelles sont: Min = " + str(infL) + " Max = " + str(supL))
     
 
 def difficultyLevel():
@@ -66,14 +67,13 @@ Entrez ici votre choix: """))
         sup = 100
     return(inf, sup)
 
-#inf = saisieNum("Veuillez entrer la limite inférieure pour le jeu: ")
-#sup = saisieNum("Veuillez entrer la limite supérieure pour le jeu: ")
 def myGame():
     inf, sup = difficultyLevel()
-#    helpansw = helpQuestion()
+    helpansw = helpQuestion()
     myRand = randIntGen(inf, sup)
     count, infL, supL = 1, inf, sup
     while True:
+        limiter(helpansw, infL, supL)
         guess = saisieNum("Votre nombre? ")
         if guess == myRand:
             print("Gagné!")
@@ -85,7 +85,7 @@ def myGame():
             pass
         elif guess < myRand:
             count = count +1
-            infL = myRand
+            infL = guess
             print("Trop bas!")
             pass
         elif guess > sup:
@@ -94,8 +94,11 @@ def myGame():
             pass
         else:
             count = count + 1
-            supL = myRand
+            supL = guess
             print("Trop haut!")
             pass
 
 myGame()
+#helpansw = helpQuestion()
+#print(helpansw)
+#limiter(helpansw)
