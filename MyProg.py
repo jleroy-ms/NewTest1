@@ -1,15 +1,15 @@
-def myfunct():
-    while True:
-        myWords = input("How are you today? ")
-        if myWords == "Fine":
-            print("Good for you!")
-            break
-        elif myWords == "Bad":
-            print("Sorry to hear that")
-            break
-        else:
-            print("Wut?")
-            pass
+#def myfunct():
+#    while True:
+ #       myWords = input("How are you today? ")
+  #      if myWords == "Fine":
+  #          print("Good for you!")
+  #          break
+   #     elif myWords == "Bad":
+  #          print("Sorry to hear that")
+   #         break
+   #     else:
+  #          print("What?")
+   #         pass
 
 def saisieNum(invite):
     while True:
@@ -24,6 +24,21 @@ def randIntGen(a, b):
     import random
     randNum = random.randint(a, b)
     return randNum
+
+def helpQuestion():
+    while True:
+        helpansw = input("Voulez-vous afficher les limites révisées après chaque tentative pour mieux visualiser où vous en êtes? Y/N : ")
+        try:
+            helpansw == "Y" or helpansw == "N"
+            break
+        except:
+            pass
+        return helpansw
+
+#def limiter(helpansw):
+#    if helpansw == "Y":
+#        print("Les limites actuelles sont: Min = " + str(infL) + " Max = " + str(supL))
+    
 
 def difficultyLevel():
     inf = 1
@@ -53,29 +68,34 @@ Entrez ici votre choix: """))
 
 #inf = saisieNum("Veuillez entrer la limite inférieure pour le jeu: ")
 #sup = saisieNum("Veuillez entrer la limite supérieure pour le jeu: ")
+def myGame():
+    inf, sup = difficultyLevel()
+#    helpansw = helpQuestion()
+    myRand = randIntGen(inf, sup)
+    count, infL, supL = 1, inf, sup
+    while True:
+        guess = saisieNum("Votre nombre? ")
+        if guess == myRand:
+            print("Gagné!")
+            print("Vous avez mis " + str(count) + " essais.")
+            break
+        elif guess < inf:
+            count = count + 1
+            print("Vous êtes en-dessous de la limite, qui a été définie comme " + str(inf))
+            pass
+        elif guess < myRand:
+            count = count +1
+            infL = myRand
+            print("Trop bas!")
+            pass
+        elif guess > sup:
+            count = count + 1
+            print("Vous êtes au-dessus de la limite, qui a été définie comme " + str(sup))
+            pass
+        else:
+            count = count + 1
+            supL = myRand
+            print("Trop haut!")
+            pass
 
-inf, sup = difficultyLevel()
-myRand = randIntGen(inf, sup)
-count = 1
-while True:
-    guess = saisieNum("Votre nombre? ")
-    if guess == myRand:
-        print("Gagné!")
-        print("Vous avez mis " + str(count) + " essais.")
-        break
-    elif guess < inf:
-        count = count + 1
-        print("Vous êtes en-dessous de la limite, qui a été définie comme " + str(inf))
-        pass
-    elif guess < myRand:
-        count = count +1
-        print("Trop bas!")
-        pass
-    elif guess > sup:
-        count = count + 1
-        print("Vous êtes au-dessus de la limite, qui a été définie comme " + str(sup))
-        pass
-    else:
-        count = count + 1
-        print("Trop haut!")
-        pass
+myGame()
