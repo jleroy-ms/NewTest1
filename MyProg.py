@@ -1,3 +1,5 @@
+# premier test github laissé à titre d'exemple
+
 #def myfunct():
 #    while True:
  #       myWords = input("How are you today? ")
@@ -11,6 +13,8 @@
   #          print("What?")
    #         pass
 
+#programme pour le jeu à partir de cette ligne
+   
 def saisieNum(invite):
     while True:
         myNum = int(input(invite))
